@@ -21,28 +21,18 @@ npm i
 ### cli 版本
 
 ```bash
-node index.mjs
+npm run cli
 ```
 
 ![cli运行结果](./cli-preview.jpg)
 
 ### 运行 web 版
 
-> web 版信息不全
+> web 没有充值信息
 
 ```bash
 cd web
 npm run build
 cd ..
-node api.mjs
+npm run web
 ```
-
-## 注意事项
-
-web 版本默认是跑在 ipv6 的 80 端口，如需改为 ipv4 的话只要修改 `api.mjs`的第 40 行为
-
-```js
-await f.listen(80);
-```
-
-当然，如果想要改变端口只需要改变 80 为其他端口号即可

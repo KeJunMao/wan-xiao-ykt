@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 // 对象转数组
 function ObjToArr(obj) {
   return Object.keys(obj).map((name) => ({
@@ -13,6 +11,9 @@ function countData(obj, cell) {
   const opfare = parseFloat(cell.opfare);
   obj.count++;
   obj.sum += opfare;
+  if (cell.description === "购热水支出") {
+    cell.description = "洗澡支出";
+  }
   if (!obj.category[cell.description]) {
     obj.category[cell.description] = {
       count: 0,
@@ -65,6 +66,7 @@ export default function analysis(data) {
   recharge.terms = ObjToArr(recharge.terms);
   expend.category = ObjToArr(expend.category);
   recharge.category = ObjToArr(recharge.category);
+  expend.category.sort((a, b) => b.sum - a.sum);
 
   const expendMax = {
     count: expend.terms.sort((a, b) => b.count - a.count)[0],

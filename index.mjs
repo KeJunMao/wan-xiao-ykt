@@ -1,5 +1,5 @@
 import CampusCard from "./campus.mjs";
-import analysis from "./analysis.mjs";
+import analysis from "./utils/analysis.mjs";
 import chalkPipe from "chalk-pipe";
 import chalk from "chalk";
 import dotenv from "dotenv";
@@ -19,33 +19,46 @@ flag ? await user.login() : "";
 const data = await user.getTradeDetail("2020-10-1", "2020-12-31");
 const ad = analysis(data);
 const { expend: ed, recharge: rd, expendMax: md } = ad;
+console.log(md);
 // 转换为钱
 const tm = (m) => "¥" + m.toFixed("2");
 
 log(title1("\n山西传媒 - 我的校园卡 2020 年度报告\n"));
 
 log(
-  `${title2("我总支出的")} - 共计 ${value(ed.count)} 笔，合计: ${value(
+  `${title2("我总支出的")} - 共计 ${value(ed.count)} 笔，合计： ${value(
     tm(ed.sum)
   )}\n`
 );
 ed.category.forEach((item) => {
   log(
-    ` • ${label(item.name)} ${value(item.count)} 笔,合计 ${value(tm(item.sum))}`
+    ` • ${label(item.name)} ${value(item.count)} 笔\t合计： ${value(
+      tm(item.sum)
+    )}`
   );
 });
 log();
-log(`其中我消费最多的是${value(md.sum.name)}，这家店物美价廉；`);
-log(`      最长照顾的是${value(md.count.name)}，这一年，我还是只喝的起水。\n`);
+log(
+  `其中我消费最多的是${value(md.sum.name)}，共 ${value(
+    md.sum.count
+  )} 笔，合计 ${value(tm(md.sum.sum))}；`
+);
+log(
+  `      最常照顾的是${value(md.count.name)}，共 ${value(
+    md.count.count
+  )} 笔，合计 ${value(tm(md.count.sum))}。\n`
+);
 
 log(
-  `${title2("我总充值的")} - 共计 ${value(rd.count)} 笔，合计: ${value(
+  `${title2("我总充值的")} - 共计 ${value(rd.count)} 笔，合计： ${value(
     tm(rd.sum)
   )}\n`
 );
 rd.category.forEach((item) => {
   log(
-    ` • ${label(item.name)} ${value(item.count)} 笔,合计 ${value(tm(item.sum))}`
+    ` • ${label(item.name)} ${value(item.count)} 笔\t合计 ${value(
+      tm(item.sum)
+    )}`
   );
 });
 log();

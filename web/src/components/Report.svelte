@@ -5,6 +5,18 @@
     sum: 0,
     category: [],
   };
+  export let expendMax = {
+    count: {
+      name: "",
+      count: 0,
+      sum: 0,
+    },
+    sum: {
+      name: "",
+      count: 0,
+      sum: 0,
+    },
+  };
   const colorList = ["blue", "orange", "red"];
 </script>
 
@@ -52,10 +64,32 @@
         <div class="report-category-value">¥{item.sum.toFixed(2)}</div>
       </div>
     {/each}
+    <div class="report-max weui-article">
+      <p class="report-max-p">
+        - 其中我消费最多的是「<span class="value">{expendMax.sum.name}</span
+        >」，共
+        <span class="value">{expendMax.sum.count}</span>
+        笔，合计; <span class="value">¥{expendMax.sum.sum.toFixed(2)}</span>；
+      </p>
+      <p class="report-max-p">
+        - 最常照顾的是「<span class="value">{expendMax.count.name}</span>」，共
+        <span class="value">{expendMax.count.count}</span>
+        笔，合计 <span class="value">¥{expendMax.count.sum.toFixed(2)}</span>。
+      </p>
+    </div>
   </div>
 </div>
 
 <style>
+  .report-max-p {
+    color: var(--weui-FG-1);
+  }
+  .report-max-p .value {
+    color: var(--weui-TAG-TEXT-ORANGE);
+  }
+  .report-max {
+    margin-top: 1em;
+  }
   .report-cell.blue .weui-progress__inner-bar {
     background-color: var(--weui-BLUE);
   }
@@ -115,14 +149,14 @@
     padding: 1em 0;
   }
   .report-label {
-    color: var(--weui-BG-0);
+    color: var(--weui-FG-1);
     padding: 0.5em 0;
   }
   .report-value {
     font-size: 3em;
   }
   .report-expend-category {
-    background-color: var(--weui-WHITE);
+    background-color: var(--weui-BG-2);
     color: var(--weui-FG-0);
     padding: 1.25em;
     border-radius: 1em 1em 0px 0px;

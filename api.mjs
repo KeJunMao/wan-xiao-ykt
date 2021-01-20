@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import CampusCard from "./campus.mjs";
-import analysis from "./analysis.mjs";
+import analysis from "./utils/analysis.mjs";
 import path from "path";
 import fastifyStatic from "fastify-static";
 
@@ -37,7 +37,8 @@ f.post("/api/get", async (request, reply) => {
 
 const start = async () => {
   try {
-    await f.listen(80, "::");
+    // await f.listen(80, "::");
+    await f.listen(3000);
     f.log.info(`server listening on ${f.server.address().port}`);
   } catch (err) {
     f.log.error(err);

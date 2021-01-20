@@ -1,7 +1,7 @@
-import { createRSAKeyPair } from "./rsaEncrypt.mjs";
-import { randInt } from "./utils.mjs";
-import { des3Encrypt } from "./des3.mjs";
-import { sha256 } from "./sha1.mjs";
+import { createRSAKeyPair } from "./utils/rsaEncrypt.mjs";
+import randInt from "./utils/randInt.mjs";
+import { des3Encrypt } from "./utils/des3.mjs";
+import { sha256 } from "./utils/sha1.mjs";
 import fetch from "node-fetch";
 
 export default class CampusCard {

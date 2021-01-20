@@ -1,6 +1,5 @@
 <script>
   import Report from "./components/Report.svelte";
-  import { onMount } from "svelte";
 
   let phone = "";
   let password = "";
@@ -11,6 +10,7 @@
   }
   let reportData = {};
   let expend = {};
+  let expendMax = {};
   let toast, loadingToast;
 
   function Login() {
@@ -28,11 +28,9 @@
         if (json.data) {
           reportData = json.data;
           expend = reportData.expend;
+          expendMax = reportData.expendMax;
           expend.category.map((item) => {
-            if (item.name === "购热水支出") {
-              item.name = "洗澡支出";
-            }
-            item.len = `${(item.sum / expend.sum) * 100}%`;
+            item.len = `${(item.count / expend.count) * 100}%`;
             return item;
           });
           login = true;
@@ -115,7 +113,7 @@
               disabled ? "weui-btn_disabled" : ""
             }`}
             {disabled}
-            on:click={Login}>确定</button
+            on:click={Login}>登陆</button
           >
         </div>
         <div class="weui-form__extra-area">
@@ -132,6 +130,12 @@
       </div>
     </div>
   {:else}
-    <Report {expend} />
+    <Report {expend} {expendMax} />
   {/if}
 </main>
+
+<style>
+  .weui-form {
+    min-height: 100vh;
+  }
+</style>

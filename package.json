@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
+    "web": "node api.mjs",
+    "cli": "node index.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
