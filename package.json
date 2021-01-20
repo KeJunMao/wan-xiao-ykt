@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "web": "node api.mjs",
+    "start": "node api.mjs",
     "cli": "node index.mjs",
+    "web": "cd web && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -18,5 +19,8 @@
     "fastify-static": "^3.4.0",
     "node-fetch": "^2.6.1",
     "node-rsa": "^1.1.1"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

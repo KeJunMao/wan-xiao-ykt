@@ -3,6 +3,8 @@ import CampusCard from "./campus.mjs";
 import analysis from "./utils/analysis.mjs";
 import path from "path";
 import fastifyStatic from "fastify-static";
+import dotenv from "dotenv";
+dotenv.config();
 
 const f = fastify({ logger: true });
 f.register(fastifyStatic, {
@@ -37,8 +39,7 @@ f.post("/api/get", async (request, reply) => {
 
 const start = async () => {
   try {
-    // await f.listen(80, "::");
-    await f.listen(3000);
+    await f.listen(process.env.PORT || 3000, "0.0.0.0");
     f.log.info(`server listening on ${f.server.address().port}`);
   } catch (err) {
     f.log.error(err);
